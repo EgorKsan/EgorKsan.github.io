@@ -3,9 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Virtual Tour</title>
-  <link rel="stylesheet" href="https://unpkg.com/pannellum/build/pannellum.css">
-  <script src="https://unpkg.com/pannellum/build/pannellum.js"></script>
+  <title>VirtualTour</title>
+  <!-- Фиксированная версия Pannellum -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+  <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
   <style>
     html,body{height:100%;margin:0;background:#000}
     #panorama{width:100%;height:100%}
@@ -16,39 +17,65 @@
 </head>
 <body>
   <div id="panorama"></div>
-  <script>
-    const common = {type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120};
 
-    const viewer = pannellum.viewer('panorama', {
-      default: { firstScene: 'studio1', sceneFadeDuration: 400, autoLoad: true },
-      scenes: {
-        studio1: {
-          ...common,
-          panorama: "p21fin.jpg",
-          hotSpots: [
-            // переход в сцену 2
-            { pitch: 3, yaw: 35, type: "scene", cssClass:"dot nav",
-              text: "Studio 2", sceneId: "studio2", targetYaw: 180, targetPitch: 0 },
-            // инфо-точка
-            { pitch: -8, yaw: -20, type: "info", cssClass:"dot info",
-              text: "Доп. услуга — бумажные фоны. 500 дин." }
+  <script>
+    // Лог ошибок на экран, чтобы видеть причину
+    window.onerror = (msg, src, line, col, err) => {
+      const box = document.createElement('div');
+      box.style.cssText = 'position:fixed;top:10px;left:10px;background:#c00;color:#fff;padding:6px 8px;z-index:9999;border-radius:6px;max-width:90vw;font:12px monospace';
+      box.textContent = 'JS error: ' + msg;
+      document.body.appendChild(box);
+      console.error(msg, src, line, col, err);
+    };
+
+    // Минимальная конфигурация без "..." и прочего
+    var common = {
+      type: "equirectangular",
+      autoLoad: true,
+      hfov: 100,
+      minHfov: 50,
+      maxHfov: 120
+    };
+
+    var viewer = pannellum.viewer('panorama', {
+      "default": { "firstScene": "studio1", "sceneFadeDuration": 400, "autoLoad": true },
+      "scenes": {
+        "studio1": {
+          "type": common.type,
+          "autoLoad": common.autoLoad,
+          "hfov": common.hfov, "minHfov": common.minHfov, "maxHfov": common.maxHfov,
+          "panorama": "p21fin.jpg",
+          "hotSpots": [
+            { "pitch": 3, "yaw": 35, "type": "scene", "cssClass": "dot nav",
+              "text": "Studio 2", "sceneId": "studio2", "targetYaw": 180, "targetPitch": 0 },
+            { "pitch": -8, "yaw": -20, "type": "info", "cssClass": "dot info",
+              "text": "Доп. услуга — бумажные фоны. 500 дин." }
           ]
         },
-        studio2: {
-          ...common,
-          panorama: "p22fin.jpg",
-          hotSpots: [
-            { pitch: 2, yaw: -150, type: "scene", cssClass:"dot nav",
-              text: "Studio 1", sceneId: "studio1", targetYaw: 15, targetPitch: 0 },
-            { pitch: -5, yaw: 70, type: "info", cssClass:"dot info",
-              text: "Постоянный свет SL150 — входит в аренду" }
+        "studio2": {
+          "type": common.type,
+          "autoLoad": common.autoLoad,
+          "hfov": common.hfov, "minHfov": common.minHfov, "maxHfov": common.maxHfov,
+          "panorama": "p22fin.jpg",
+          "hotSpots": [
+            { "pitch": 2, "yaw": -150, "type": "scene", "cssClass": "dot nav",
+              "text": "Studio 1", "sceneId": "studio1", "targetYaw": 15, "targetPitch": 0 },
+            { "pitch": -5, "yaw": 70, "type": "info", "cssClass": "dot info",
+              "text": "Постоянный свет SL150 — входит в аренду" }
           ]
         }
       }
     });
 
-    // Подсказка: открой консоль и смотри координаты
-    // console.log(viewer.getYaw(), viewer.getPitch());
+    // Для диагностики: покажем процесс загрузки
+    viewer.on('load', () => console.log('Pannellum loaded first frame'));
+    viewer.on('error', (e) => {
+      const box = document.createElement('div');
+      box.style.cssText = 'position:fixed;top:40px;left:10px;background:#d97706;color:#000;padding:6px 8px;z-index:9999;border-radius:6px;max-width:90vw;font:12px monospace';
+      box.textContent = 'Pannellum error: ' + e?.message;
+      document.body.appendChild(box);
+      console.error('Pannellum error:', e);
+    });
   </script>
 </body>
 </html>
