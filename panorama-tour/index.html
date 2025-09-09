@@ -18,11 +18,11 @@
 
     /* Кружки */
     .dot{
-      width:26px;height:26px;border-radius:50%;
+      width:50px;height:50px;border-radius:50%;
       background:rgba(255,255,255,.5) !important; /* заливка — белая 50% */
       box-sizing:border-box;
     }
-    .dot.nav{ border:2px solid #fff; cursor:pointer; } /* переход — с белым контуром */
+    .dot.nav{ border:6px solid #fff; cursor:pointer; } /* переход — с белым контуром */
     .dot.info{ border:none; }
 
     /* Кастомный тултип на hover (используем data-tip на хотспоте) */
@@ -59,22 +59,31 @@
       z-index:9999; display:flex; flex-direction:column; gap:10px;
     }
     .scene-btn{
-      display:flex; align-items:center; gap:10px;
-      background:rgba(255,255,255,.3);
-      color:#000; border:none; padding:8px 10px;
-      cursor:pointer; /* «острые углы» — без бордерадиуса */
+      display:flex; 
+      align-items:center; 
+      gap:10px;background:rgba(255,255,255,.3);
+      color:#000;padding:8px 10px;cursor:pointer;
+    }
+    .scene-btn input{ 
+      display:none; 
     }
     .scene-btn .radio{
-      width:16px; height:16px; border:2px solid #000; border-radius:50%;
-      display:inline-flex; align-items:center; justify-content:center;
-      background:#000; /* чёрный кружок */
+      width:16px; 
+      height:16px; 
+      border:2px solid #000; 
+      border-radius:50%;
+      display:inline-block; 
+      position:relative;
     }
-    .scene-btn .radio .dot{
-      width:8px; height:8px; border-radius:50%;
-      background:transparent;
+    .scene-btn input:checked + .radio::after{
+      content:''; position:absolute; 
+      left:3px; 
+      top:3px;
+      width:8px; 
+      height:8px; 
+      border-radius:50%;
+      background:#000;
     }
-    .scene-btn.active .radio{ background:#000; }
-    .scene-btn.active .radio .dot{ background:#fff; } /* активная — белая точка внутри */
   </style>
 </head>
 <body>
@@ -89,14 +98,16 @@
 
   <!-- Навигация сцен слева -->
   <div class="scene-nav">
-    <button class="scene-btn active" data-scene="studio1">
-      <span class="radio"><span class="dot"></span></span>
+    <label class="scene-btn">
+      <input type="radio" name="scene" value="studio1" checked>
+      <span class="radio"></span>
       <span>Studio 1</span>
-    </button>
-    <button class="scene-btn" data-scene="studio2">
-      <span class="radio"><span class="dot"></span></span>
+    </label>
+    <label class="scene-btn">
+      <input type="radio" name="scene" value="studio2">
+      <span class="radio"></span>
       <span>Studio 2</span>
-    </button>
+    </label>
   </div>
 
   <script>
