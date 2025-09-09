@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>StudioGoboVirtualTour</title>
 
-  <!-- Pannellum (фиксированная версия) -->
+  <!-- Pannellum -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
@@ -13,19 +13,19 @@
     html,body{height:100%;margin:0;background:#000}
     #panorama{width:100%;height:100%}
 
-    /* убираем дефолтную иконку хотспота, но НЕ ломаем наши фоны */
+    /* убираем дефолтную иконку хотспота */
     .pnlm-hotspot{ background:none; }
 
-    /* Кружки */
+    /* Кружки хотспотов */
     .dot{
       width:50px;height:50px;border-radius:50%;
-      background:rgba(255,255,255,.5) !important; /* заливка — белая 50% */
+      background:rgba(255,255,255,.5) !important;
       box-sizing:border-box;
     }
-    .dot.nav{ border:6px solid #fff; cursor:pointer; } /* переход — с белым контуром */
+    .dot.nav{ border:6px solid #fff; cursor:pointer; }
     .dot.info{ border:none; }
 
-    /* Кастомный тултип на hover (используем data-tip на хотспоте) */
+    /* тултип на hover */
     .dot.info[data-tip]:hover::after{
       content: attr(data-tip);
       position:absolute;
@@ -42,112 +42,49 @@
       z-index:10000;
     }
 
-    /* Панель языков (справа вверху, можно убрать/переставить) */
-    .langbar{
-      position:fixed; top:10px; right:10px; z-index:9999;
-      display:flex; gap:6px;
-    }
-    .langbar button{
-      padding:6px 10px; border:0; border-radius:8px; cursor:pointer;
-      background:rgba(255,255,255,.2); color:#fff;
-    }
-    .langbar button.active{ background:rgba(255,255,255,.45); color:#000; }
-
-    /* Левый вертикальный «радио»-лист сцен */
+    /* Левый столбик кнопок */
     .scene-nav{
       position:fixed; left:10px; top:50%; transform:translateY(-50%);
       z-index:9999; display:flex; flex-direction:column; gap:10px;
     }
     .scene-btn{
-      display:flex; 
-      align-items:center; 
-      gap:10px;background:rgba(255,255,255,.3);
-      color:#000;padding:8px 10px;cursor:pointer;
+      background:rgba(255,255,255,.3);
+      color:#000;
+      padding:8px 12px;
+      border:none;
+      cursor:pointer;
+      text-align:left;
     }
-    .scene-btn input{ 
-      display:none; 
-    }
-    .scene-btn .radio{
-      width:16px; 
-      height:16px; 
-      border:2px solid #000; 
-      border-radius:50%;
-      display:inline-block; 
-      position:relative;
-    }
-    .scene-btn input:checked + .radio::after{
-      content:''; position:absolute; 
-      left:3px; 
-      top:3px;
-      width:8px; 
-      height:8px; 
-      border-radius:50%;
-      background:#000;
+    .scene-btn.active{
+      background:rgba(255,255,255,.6);
+      font-weight:bold;
     }
   </style>
 </head>
 <body>
   <div id="panorama"></div>
 
-  <!-- Языки -->
-  <div class="langbar">
-    <button data-lang="ru" class="active">RU</button>
-    <button data-lang="en">EN</button>
-    <button data-lang="sr">SR</button>
-  </div>
-
-  <!-- Навигация сцен слева -->
+  <!-- Навигация сцен -->
   <div class="scene-nav">
-    <label class="scene-btn">
-      <input type="radio" name="scene" value="studio1" checked>
-      <span class="radio"></span>
-      <span>Studio 1</span>
-    </label>
-    <label class="scene-btn">
-      <input type="radio" name="scene" value="studio2">
-      <span class="radio"></span>
-      <span>Studio 2</span>
-    </label>
+    <button class="scene-btn active" data-scene="studio1">Studio 1</button>
+    <button class="scene-btn" data-scene="studio2">Studio 2</button>
   </div>
 
   <script>
-    // ---------- I18N ----------
-    const I18N = {
-      ru: {
-        paper_bg: "Доп. услуга — бумажные фоны. 500 дин.",
-        sl150:    "Постоянный свет SL150 — входит в аренду",
-        to_s2:    "Перейти: Studio 2",
-        to_s1:    "Перейти: Studio 1"
-      },
-      en: {
-        paper_bg: "Extra service — paper backdrops. 500 RSD.",
-        sl150:    "Continuous light SL150 — included",
-        to_s2:    "Go to: Studio 2",
-        to_s1:    "Go to: Studio 1"
-      },
-      sr: {
-        paper_bg: "Dodatna usluga — papirne pozadine. 500 RSD.",
-        sl150:    "Stalno svetlo SL150 — uključeno",
-        to_s2:    "Idi na: Studio 2",
-        to_s1:    "Idi na: Studio 1"
-      }
-    };
-    let LANG = 'ru';
-
-    // ---------- БАЗОВОЕ ОПИСАНИЕ СЦЕН (файлы + координаты, КАК ТЫ ДАЛ) ----------
+    // ---------- БАЗОВОЕ ОПИСАНИЕ СЦЕН ----------
     const SCENES_BASE = {
       studio1: {
-        pano: "p21fin.jpg?v=1",  // cache-buster
+        pano: "p21fin.jpg?v=2",  // cache-buster
         hotSpots: [
-          { id:'to_s2',  type:'scene', yaw: 5.75,   pitch: 0.16,  sceneId:'studio2', kind:'nav' },
-          { id:'paper_bg', type:'info', yaw:-83.33, pitch:14.97, kind:'info' },
-          { id:'sl150',    type:'info', yaw:-145.18,pitch: 2.35, kind:'info' }
+          { id:'to_s2', type:'scene', yaw:5.75, pitch:0.16, sceneId:'studio2', kind:'nav', text:"Go to Studio 2" },
+          { id:'paper_bg', type:'info', yaw:-83.33, pitch:14.97, kind:'info', text:"Extra service — paper backdrops. 500 RSD." },
+          { id:'sl150', type:'info', yaw:-145.18, pitch:2.35, kind:'info', text:"Continuous light SL150 — included in rental." }
         ]
       },
       studio2: {
-        pano: "p22fin.jpg?v=1",
+        pano: "p22fin.jpg?v=2",
         hotSpots: [
-          { id:'to_s1',  type:'scene', yaw:-142.83, pitch: 1.42, sceneId:'studio1', kind:'nav' }
+          { id:'to_s1', type:'scene', yaw:-142.83, pitch:1.42, sceneId:'studio1', kind:'nav', text:"Go to Studio 1" }
         ]
       }
     };
@@ -155,93 +92,57 @@
     // ---------- Pannellum ----------
     var viewer = pannellum.viewer('panorama', {
       "default": { "firstScene": "studio1", "sceneFadeDuration": 400, "autoLoad": true },
-      "scenes": buildScenes(LANG)
+      "scenes": buildScenes()
     });
 
     // лог для отладки
     viewer.on('load', () => console.log('Pannellum loaded first frame'));
     viewer.on('error', (e) => console.error('Pannellum error:', e));
 
-    // Клик для быстрого снятия координат (в консоль)
-    document.getElementById('panorama').addEventListener('click', ()=>{
-      console.log('yaw:', viewer.getYaw().toFixed(2), 'pitch:', viewer.getPitch().toFixed(2));
-    });
-
-    // ---------- Кастомный «рисователь» кружка ----------
+    // ---------- Рисуем кружки ----------
     function makeDot(hotSpotDiv, args){
-      // отключаем деф. фон (стрелка), и навешиваем наши классы
       hotSpotDiv.style.background = 'none';
       hotSpotDiv.classList.add('dot', args?.kind === 'nav' ? 'nav' : 'info');
-
-      // для info даём data-tip — наш псевдо-тултип на hover
       if (args?.kind === 'info' && args?.tip) {
         hotSpotDiv.setAttribute('data-tip', args.tip);
       }
-
-      // чтобы было удобно кликать по nav
       if (args?.kind === 'nav') {
         hotSpotDiv.style.cursor = 'pointer';
       }
     }
 
-    // ---------- Генератор сцен под язык ----------
-    function buildScenes(lang){
+    // ---------- Генератор сцен ----------
+    function buildScenes(){
       const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
       const scenes = {};
-
       for (const [key, s] of Object.entries(SCENES_BASE)){
         scenes[key] = { ...common, panorama: s.pano, hotSpots: [] };
-
-        s.hotSpots.forEach(h => {
-          if (h.type === 'scene'){
-            scenes[key].hotSpots.push({
-              pitch: h.pitch, yaw: h.yaw, type:'scene', sceneId: h.sceneId,
-              text: I18N[lang][h.id] || '', // текст тултипа у сцены (можно оставить пустым)
-              createTooltipFunc: makeDot, createTooltipArgs: { kind:'nav' }
-            });
-          } else {
-            // info с языковым текстом
-            scenes[key].hotSpots.push({
-              pitch: h.pitch, yaw: h.yaw, type:'info',
-              text: I18N[lang][h.id] || '', // не обязателен, но пусть будет
-              createTooltipFunc: makeDot, createTooltipArgs: { kind:'info', tip: I18N[lang][h.id] || '' }
-            });
-          }
+        s.hotSpots.forEach(h=>{
+          scenes[key].hotSpots.push({
+            pitch:h.pitch, yaw:h.yaw, type:h.type, sceneId:h.sceneId,
+            text:h.text,
+            createTooltipFunc: makeDot,
+            createTooltipArgs:{ kind:h.kind, tip:h.text }
+          });
         });
       }
       return scenes;
     }
 
-    // ---------- Переключение языков ----------
-    document.querySelectorAll('.langbar button').forEach(btn=>{
+    // ---------- Кнопки слева ----------
+    function updateSceneButtons(active){
+      document.querySelectorAll('.scene-btn').forEach(b=>{
+        b.classList.toggle('active', b.dataset.scene === active);
+      });
+    }
+    document.querySelectorAll('.scene-btn').forEach(btn=>{
       btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.langbar button').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        LANG = btn.dataset.lang;
-
-        const current = viewer.getScene();
+        const target = btn.dataset.scene;
         const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-
-        // Пересобираем конфиг под язык и остаёмся в текущей сцене
-        viewer.setConfig({ default:{ firstScene: current }, scenes: buildScenes(LANG) });
-        viewer.loadScene(current, yaw, pitch, hfov);
-
-        // Обновим подсветку кнопок слева
-        updateSceneButtons(current);
+        viewer.loadScene(target, yaw, pitch, hfov);
+        updateSceneButtons(target);
       });
     });
-
-    // ---------- Кнопки слева для смены сцен ----------
-    document.querySelectorAll('.scene-btn input').forEach(r=>{
-      r.addEventListener('change', ()=>{
-        if (r.checked){
-          const target = r.value;
-          const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-          viewer.loadScene(target, yaw, pitch, hfov);
-        }
-      });
-    });
-    // Инициализируем активную кнопку
     updateSceneButtons('studio1');
   </script>
 </body>
