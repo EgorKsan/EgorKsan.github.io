@@ -18,7 +18,6 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.5);}
     .dot.nav {border: 2px solid white;}
-    .dot.nav { border:2px solid #fff; cursor:pointer; }
     .dot.info {border: none;}
 
   </style>
@@ -53,8 +52,9 @@
           "autoLoad": common.autoLoad,
           "hfov": common.hfov, "minHfov": common.minHfov, "maxHfov": common.maxHfov,
           "panorama": "p21fin.jpg",
-          "hotSpots": [{ pitch: 2,  yaw: 20,  type:"scene", sceneId:"studio2",text:"Studio 2",createTooltipFunc: makeDot, createTooltipArgs:{ kind:'nav' } },
-                       { pitch: 85,  yaw: 14, type:"info", text:"Доп. услуга — бумажные фоны. 500 дин.", createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } },
+          "hotSpots": [ 
+            { pitch: 2,  yaw: 20,  type:"scene", sceneId:"studio2",text:"Studio 2",createTooltipFunc: makeDot, createTooltipArgs:{ kind:'nav' } },
+            { pitch: 85,  yaw: 14, type:"info", text:"Доп. услуга — бумажные фоны. 500 дин.", createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } }
           ]
         },
         "studio2": {
@@ -69,7 +69,7 @@
 
 { pitch:-5,  yaw: 70, type:"info",
   text:"Постоянный свет SL150 — входит в аренду",
-  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } },
+  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } }
           ]
         }
       }
