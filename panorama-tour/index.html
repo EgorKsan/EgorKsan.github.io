@@ -237,12 +237,13 @@
         b.classList.toggle('active', b.dataset.scene === active);
       });
     }
-    document.querySelectorAll('.scene-btn').forEach(b=>{
-      b.addEventListener('click', ()=>{
-        const target = b.dataset.scene;
-        const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-        viewer.loadScene(target, yaw, pitch, hfov);
-        updateSceneButtons(target);
+    document.querySelectorAll('.scene-btn input').forEach(r=>{
+      r.addEventListener('change', ()=>{
+        if (r.checked){
+          const target = r.value;
+          const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
+          viewer.loadScene(target, yaw, pitch, hfov);
+        }
       });
     });
     // Инициализируем активную кнопку
