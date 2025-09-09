@@ -232,11 +232,6 @@
     });
 
     // ---------- Кнопки слева для смены сцен ----------
-    function updateSceneButtons(active){
-      document.querySelectorAll('.scene-btn').forEach(b=>{
-        b.classList.toggle('active', b.dataset.scene === active);
-      });
-    }
     document.querySelectorAll('.scene-btn input').forEach(r=>{
       r.addEventListener('change', ()=>{
         if (r.checked){
