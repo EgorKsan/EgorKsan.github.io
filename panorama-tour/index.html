@@ -3,13 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>VirtualTour</title>
+  <title>StudioGoboVirtualTour</title>
   <!-- Фиксированная версия Pannellum -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
   <style>
     html,body{height:100%;margin:0;background:#000}
     #panorama{width:100%;height:100%}
+    .pnlm-hotspot { background: none !important; }
     .pnlm-tooltip{background:rgba(0,0,0,.85);color:#fff;padding:6px 8px;border-radius:6px;font:14px/1.3 system-ui;max-width:260px}
     .dot {
       width: 26px;
@@ -17,6 +18,7 @@
       border-radius: 50%;
       background: rgba(255,255,255,0.5);}
     .dot.nav {border: 2px solid white;}
+    .dot.nav { border:2px solid #fff; cursor:pointer; }
     .dot.info {border: none;}
 
   </style>
@@ -52,10 +54,13 @@
           "hfov": common.hfov, "minHfov": common.minHfov, "maxHfov": common.maxHfov,
           "panorama": "p21fin.jpg",
           "hotSpots": [
-            { "pitch": 3, "yaw": 35, "type": "scene", "cssClass": "dot nav",
-              "text": "Studio 2", "sceneId": "studio2", "targetYaw": 180, "targetPitch": 0 },
-            { "pitch": -8, "yaw": -20, "type": "info", "cssClass": "dot info",
-              "text": "Доп. услуга — бумажные фоны. 500 дин." }
+            { pitch: 3,  yaw: 35,  type:"scene", sceneId:"studio2",
+  text:"Studio 2",
+  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'nav' } },
+
+{ pitch:-8,  yaw:-20, type:"info",
+  text:"Доп. услуга — бумажные фоны. 500 дин.",
+  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } },
           ]
         },
         "studio2": {
@@ -64,10 +69,13 @@
           "hfov": common.hfov, "minHfov": common.minHfov, "maxHfov": common.maxHfov,
           "panorama": "p22fin.jpg",
           "hotSpots": [
-            { "pitch": 2, "yaw": -150, "type": "scene", "cssClass": "dot nav",
-              "text": "Studio 1", "sceneId": "studio1", "targetYaw": 15, "targetPitch": 0 },
-            { "pitch": -5, "yaw": 70, "type": "info", "cssClass": "dot info",
-              "text": "Постоянный свет SL150 — входит в аренду" }
+            { pitch: 2,  yaw:-150, type:"scene", sceneId:"studio1",
+  text:"Studio 1",
+  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'nav' } },
+
+{ pitch:-5,  yaw: 70, type:"info",
+  text:"Постоянный свет SL150 — входит в аренду",
+  createTooltipFunc: makeDot, createTooltipArgs:{ kind:'info' } },
           ]
         }
       }
@@ -82,6 +90,13 @@
       document.body.appendChild(box);
       console.error('Pannellum error:', e);
     });
+    function makeDot(hotSpotDiv, args){
+      hotSpotDiv.classList.add('dot');
+      hotSpotDiv.classList.add(args?.kind === 'nav' ? 'nav' : 'info');
+    }
+    document.getElementById('panorama').addEventListener('click', ()=>{
+    console.log('yaw:', viewer.getYaw().toFixed(2), 'pitch:', viewer.getPitch().toFixed(2));
+  });
   </script>
 </body>
 </html>
