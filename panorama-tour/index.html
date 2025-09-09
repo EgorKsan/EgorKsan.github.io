@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Virtual Tour</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@5/dist/photo-sphere-viewer.css">
+  <script src="https://cdn.jsdelivr.net/npm/uevent@2/browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@5/dist/photo-sphere-viewer.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@5/dist/plugins/markers.js"></script>
+  <style>
+    html,body{height:100%;margin:0;background:#000}
+    #viewer{width:100%;height:100%}
+    .dot{width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 2px #fff inset,0 0 10px rgba(0,0,0,.6)}
+    .dot.nav{background:#4ade80}.dot.info{background:#60a5fa}
+  </style>
+</head>
+<body>
+  <div id="viewer"></div>
+  <script>
+    const URL1 = "p21fin.jpg";
+    const URL2 = "p22fin.jpg";
+
+    const scenes = {
+      studio1: { url: URL1, markers: [
+        { id:'to2',   longitude: THREE.MathUtils.degToRad(35),  latitude: THREE.MathUtils.degToRad(-3),  html:'<span class="dot nav"></span>',  anchor:'center center', tooltip:'Studio 2', data:{goto:'studio2'} },
+        { id:'info1', longitude: THREE.MathUtils.degToRad(-20), latitude: THREE.MathUtils.degToRad(8),   html:'<span class="dot info"></span>', anchor:'center center', tooltip:'Доп. услуга — бумажные фоны. 500 дин.' }
+      ]},
+      studio2: { url: URL2, markers: [
+        { id:'to1',   longitude: THREE.MathUtils.degToRad(-150), latitude: THREE.MathUtils.degToRad(-2), html:'<span class="dot nav"></span>',  anchor:'center center', tooltip:'Studio 1', data:{goto:'studio1'} },
+        { id:'info2', longitude: THREE.MathUtils.degToRad(70),   latitude: THREE.MathUtils.degToRad(5),  html:'<span class="dot info"></span>', anchor:'center center', tooltip:'SL150 — входит в аренду' }
+      ]}
+    };
+
+    const viewer = new PhotoSphereViewer.Viewer({
+      container: document.getElementById('viewer'),
+      panorama: scenes.studio1.url,
+      navbar: ['zoom','fullscreen'],
+      mousewheelCtrlKey: true
+    });
+
+    const markers = viewer.getPlugin(PhotoSphereViewer.MarkersPlugin);
+
+    function applyMarkers(scene){ markers.clearMarkers(); scenes[scene].markers.forEach(m=>markers.addMarker(m)); }
+    function loadScene(scene){
+      const pos=viewer.getPosition(), zoom=viewer.getZoomLevel();
+      viewer.setPanorama(scenes[scene].url,{transition:true}).then(()=>{
+        applyMarkers(scene); viewer.rotate(pos); viewer.zoom(zoom);
+      });
+    }
+    applyMarkers('studio1');
+    markers.on('select-marker', (e, m)=>{ if(m.config.data?.goto) loadScene(m.config.data.goto); });
+  </script>
+</body>
+</html>
