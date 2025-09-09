@@ -82,10 +82,7 @@
     function makeDot(hotSpotDiv, args){
       hotSpotDiv.classList.add('dot');
       hotSpotDiv.classList.add(args?.kind === 'nav' ? 'nav' : 'info');
-    }
-    document.getElementById('panorama').addEventListener('click', ()=>{
-    console.log('yaw:', viewer.getYaw().toFixed(2), 'pitch:', viewer.getPitch().toFixed(2));
-  });
+    };
   </script>
 </body>
 </html>
