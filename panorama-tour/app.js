@@ -1,9 +1,8 @@
-// Загружаем JSON файлы
 Promise.all([
   fetch('photos.json').then(r=>r.json()),
   fetch('hotspots.json').then(r=>r.json())
 ]).then(([PHOTOS, HOTSPOTS]) => {
-  
+
   // ---------- Генератор сцен ----------
   function buildScenes(){
     const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
@@ -29,9 +28,6 @@ Promise.all([
     "scenes": buildScenes()
   });
 
-  viewer.on('load', () => console.log('Pannellum loaded first frame'));
-  viewer.on('error', (e) => console.error('Pannellum error:', e));
-
   // ---------- Рисуем кружки ----------
   function makeDot(hotSpotDiv, args){
     hotSpotDiv.style.background = 'none';
@@ -44,20 +40,28 @@ Promise.all([
     }
   }
 
-  // ---------- Кнопки слева ----------
+  // ---------- Автогенерация кнопок ----------
+  const navContainer = document.querySelector('.scene-nav');
+  Object.keys(HOTSPOTS).forEach((sceneId, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'scene-btn' + (i===0 ? ' active' : '');
+    btn.dataset.scene = sceneId;
+    btn.textContent = sceneId; // можно заменить на красивое название
+    navContainer.appendChild(btn);
+
+    btn.addEventListener('click', ()=>{
+      const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
+      viewer.loadScene(sceneId, yaw, pitch, hfov);
+      updateSceneButtons(sceneId);
+    });
+  });
+
+  // ---------- Подсветка активной кнопки ----------
   function updateSceneButtons(active){
     document.querySelectorAll('.scene-btn').forEach(b=>{
       b.classList.toggle('active', b.dataset.scene === active);
     });
   }
-  document.querySelectorAll('.scene-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const target = btn.dataset.scene;
-      const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-      viewer.loadScene(target, yaw, pitch, hfov);
-      updateSceneButtons(target);
-    });
-  });
-  updateSceneButtons('studio1');
 
+  updateSceneButtons('studio1');
 });
