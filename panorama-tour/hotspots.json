@@ -3,8 +3,12 @@
     "pano": "p11",
     "hotSpots": [
       { "id":"to_s2", "type":"scene", "yaw":149.16, "pitch":22.74, "sceneId":"studio3", "kind":"nav", "text":"Go to Second Floor" },
-      { "id":"to_s2", "type":"scene", "yaw":-48.49, "pitch":0.11, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
+      { "id":"to_s2", "type":"scene", "yaw":-49.49, "pitch":0.11, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
       { "id":"qt600", "type":"info", "yaw":-69.38, "pitch":11.69, "kind":"info", "text":"Flash light QT600" },
+      { "id":"qt600", "type":"info", "yaw":-120.02, "pitch":4.22, "kind":"info", "text":"Flash light QT600" },
+      { "id":"qt600", "type":"info", "yaw":-97.96, "pitch":5.60, "kind":"info", "text":"Flash light QT600" },
+      { "id":"qt600", "type":"info", "yaw":26.30, "pitch":3.57, "kind":"info", "text":"Flash light QT600" },
+      { "id":"qt600", "type":"info", "yaw":0.97, "pitch":6.94, "kind":"info", "text":"Flash light QT600" },
       { "id":"sl150", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" }
     ]
   },
