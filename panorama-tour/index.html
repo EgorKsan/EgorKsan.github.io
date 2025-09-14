@@ -9,57 +9,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
   <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
 
-  <style>
-    html,body{height:100%;margin:0;background:#000}
-    #panorama{width:100%;height:100%}
-
-    /* убираем дефолтную иконку хотспота */
-    .pnlm-hotspot{ background:none; }
-
-    /* Кружки хотспотов */
-    .dot{
-      width:50px;height:50px;border-radius:50%;
-      background:rgba(255,255,255,.5) !important;
-      box-sizing:border-box;
-    }
-    .dot.nav{ border:6px solid #fff; cursor:pointer; }
-    .dot.info{ border:none; }
-
-    /* тултип на hover */
-    .dot.info[data-tip]:hover::after{
-      content: attr(data-tip);
-      position:absolute;
-      left:30px; top:0;
-      background:rgba(0,0,0,.85);
-      color:#fff;
-      padding:6px 8px;
-      border-radius:6px;
-      max-width:260px;
-      font:14px/1.3 system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      white-space:pre-wrap;
-      pointer-events:none;
-      transform:translateY(-50%);
-      z-index:10000;
-    }
-
-    /* Левый столбик кнопок */
-    .scene-nav{
-      position:fixed; left:10px; top:50%; transform:translateY(-50%);
-      z-index:9999; display:flex; flex-direction:column; gap:10px;
-    }
-    .scene-btn{
-      background:rgba(255,255,255,.3);
-      color:#000;
-      padding:8px 12px;
-      border:none;
-      cursor:pointer;
-      text-align:left;
-    }
-    .scene-btn.hover{
-      background:rgba(255,255,255,.15);
-      font-weight:bold;
-    }
-  </style>
+  <!-- Наш CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div id="panorama"></div>
@@ -70,80 +21,7 @@
     <button class="scene-btn" data-scene="studio2">Studio 2</button>
   </div>
 
-  <script>
-    // ---------- БАЗОВОЕ ОПИСАНИЕ СЦЕН ----------
-    const SCENES_BASE = {
-      studio1: {
-        pano: "p21fin.jpg?v=2",  // cache-buster
-        hotSpots: [
-          { id:'to_s2', type:'scene', yaw:5.75, pitch:0.16, sceneId:'studio2', kind:'nav', text:"Go to Studio 2" },
-          { id:'paper_bg', type:'info', yaw:-84.33, pitch:15.97, kind:'info', text:"Extra service — paper backdrops. 500 RSD." },
-          { id:'sl150', type:'info', yaw:-145.18, pitch:2.35, kind:'info', text:"Continuous light SL200 — included in rental." }
-        ]
-      },
-      studio2: {
-        pano: "p22fin.jpg?v=2",
-        hotSpots: [
-          { id:'to_s1', type:'scene', yaw:-142.83, pitch:1.42, sceneId:'studio1', kind:'nav', text:"Go to Studio 1" }
-        ]
-      }
-    };
-
-    // ---------- Pannellum ----------
-    var viewer = pannellum.viewer('panorama', {
-      "default": { "firstScene": "studio1", "sceneFadeDuration": 400, "autoLoad": true },
-      "scenes": buildScenes()
-    });
-
-    // лог для отладки
-    viewer.on('load', () => console.log('Pannellum loaded first frame'));
-    viewer.on('error', (e) => console.error('Pannellum error:', e));
-
-    // ---------- Рисуем кружки ----------
-    function makeDot(hotSpotDiv, args){
-      hotSpotDiv.style.background = 'none';
-      hotSpotDiv.classList.add('dot', args?.kind === 'nav' ? 'nav' : 'info');
-      if (args?.kind === 'info' && args?.tip) {
-        hotSpotDiv.setAttribute('data-tip', args.tip);
-      }
-      if (args?.kind === 'nav') {
-        hotSpotDiv.style.cursor = 'pointer';
-      }
-    }
-
-    // ---------- Генератор сцен ----------
-    function buildScenes(){
-      const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
-      const scenes = {};
-      for (const [key, s] of Object.entries(SCENES_BASE)){
-        scenes[key] = { ...common, panorama: s.pano, hotSpots: [] };
-        s.hotSpots.forEach(h=>{
-          scenes[key].hotSpots.push({
-            pitch:h.pitch, yaw:h.yaw, type:h.type, sceneId:h.sceneId,
-            text:h.text,
-            createTooltipFunc: makeDot,
-            createTooltipArgs:{ kind:h.kind, tip:h.text }
-          });
-        });
-      }
-      return scenes;
-    }
-
-    // ---------- Кнопки слева ----------
-    function updateSceneButtons(active){
-      document.querySelectorAll('.scene-btn').forEach(b=>{
-        b.classList.toggle('active', b.dataset.scene === active);
-      });
-    }
-    document.querySelectorAll('.scene-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const target = btn.dataset.scene;
-        const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-        viewer.loadScene(target, yaw, pitch, hfov);
-        updateSceneButtons(target);
-      });
-    });
-    updateSceneButtons('studio1');
-  </script>
+  <!-- Наш JS -->
+  <script src="app.js"></script>
 </body>
 </html>
