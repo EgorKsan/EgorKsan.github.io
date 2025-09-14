@@ -15,9 +15,8 @@
   "studio2": {
     "pano": "p13",
     "hotSpots": [
-      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio1", "kind":"nav", "text":"Go to Panorama" },
-      { "id":"paper_bg", "type":"info", "yaw":-84.33, "pitch":15.97, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
-      { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200 — included in rental." }
+      { "id":"to_s2", "type":"scene", "yaw":-147.95, "pitch":7.18, "sceneId":"studio1", "kind":"nav", "text":"Go to Panorama" },
+      { "id":"paper_bg", "type":"info", "yaw":142.41, "pitch":7.60, "kind":"info", "text":"Wardrobe" }
     ]
   },
   "studio3": {
