@@ -2,7 +2,8 @@
   "studio1": {
     "pano": "p11",
     "hotSpots": [
-      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio2", "kind":"nav", "text":"Go to Studio 2" },
+      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio3", "kind":"nav", "text":"Go to Second Floor" },
+      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":10.16, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
       { "id":"paper_bg", "type":"info", "yaw":-84.33, "pitch":15.97, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
       { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200 — included in rental." }
     ]
@@ -10,7 +11,7 @@
   "studio2": {
     "pano": "p13",
     "hotSpots": [
-      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio2", "kind":"nav", "text":"Go to Studio 1" },
+      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio1", "kind":"nav", "text":"Go to Panorama" },
       { "id":"paper_bg", "type":"info", "yaw":-84.33, "pitch":15.97, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
       { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200 — included in rental." }
     ]
@@ -18,7 +19,8 @@
   "studio3": {
     "pano": "p21",
     "hotSpots": [
-      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio2", "kind":"nav", "text":"Go to Studio 2" },
+      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio4", "kind":"nav", "text":"Go to Window" },
+      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":10.16, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
       { "id":"paper_bg", "type":"info", "yaw":-84.33, "pitch":15.97, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
       { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200 — included in rental." }
     ]
@@ -26,7 +28,7 @@
   "studio4": {
     "pano": "p22",
     "hotSpots": [
-      { "id":"to_s1", "type":"scene", "yaw":-142.83, "pitch":1.42, "sceneId":"studio1", "kind":"nav", "text":"Go to Studio 1" }
+      { "id":"to_s1", "type":"scene", "yaw":-142.83, "pitch":1.42, "sceneId":"studio3", "kind":"nav", "text":"Go to Main Hall" }
     ]
   }
 }
