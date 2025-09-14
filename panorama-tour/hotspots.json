@@ -3,8 +3,8 @@
     "pano": "p11",
     "hotSpots": [
       { "id":"to_s2", "type":"scene", "yaw":149.16, "pitch":22.74, "sceneId":"studio3", "kind":"nav", "text":"Go to Second Floor" },
-      { "id":"to_s2", "type":"scene", "yaw":-51.67, "pitch":0.11, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
-      { "id":"paper_bg", "type":"info", "yaw":73.94, "pitch":28.53, "kind":"info", "text":"Paper backdrops." },
+      { "id":"to_s2", "type":"scene", "yaw":-48.49, "pitch":0.11, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
+      { "id":"qt600", "type":"info", "yaw":-69.38, "pitch":11.69, "kind":"info", "text":"Flash light QT600." },
       { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200." }
     ]
   },
