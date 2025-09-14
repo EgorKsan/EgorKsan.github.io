@@ -42,21 +42,23 @@ Promise.all([
 
   // ---------- Автогенерация кнопок ----------
   const navContainer = document.querySelector('.scene-nav');
-  Object.keys(HOTSPOTS).forEach((sceneId, i) => {
+  Object.entries(HOTSPOTS).forEach(([sceneId, data], i) => {
     const btn = document.createElement('button');
     btn.className = 'scene-btn' + (i===0 ? ' active' : '');
     btn.dataset.scene = sceneId;
-    const photoKey = data.pano;
+    
+    const photoKey = data.pano;  // например "p11"
     const label = PHOTOS[photoKey]?.title || sceneId;
     btn.textContent = label;
+    
     navContainer.appendChild(btn);
-
     btn.addEventListener('click', ()=>{
       const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
       viewer.loadScene(sceneId, yaw, pitch, hfov);
       updateSceneButtons(sceneId);
     });
   });
+
 
   // ---------- Подсветка активной кнопки ----------
   function updateSceneButtons(active){
