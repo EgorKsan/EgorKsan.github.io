@@ -8,7 +8,7 @@ Promise.all([
     const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
     const scenes = {};
     for (const [sceneId, data] of Object.entries(HOTSPOTS)){
-      const panoFile = PHOTOS[data.pano];
+      const panoFile = PHOTOS[data.pano].src;
       scenes[sceneId] = { ...common, panorama: panoFile, hotSpots: [] };
       data.hotSpots.forEach(h=>{
         scenes[sceneId].hotSpots.push({
@@ -46,7 +46,9 @@ Promise.all([
     const btn = document.createElement('button');
     btn.className = 'scene-btn' + (i===0 ? ' active' : '');
     btn.dataset.scene = sceneId;
-    btn.textContent = sceneId; // можно заменить на красивое название
+    const photoKey = data.pano;
+    const label = PHOTOS[photoKey]?.title || sceneId;
+    btn.textContent = label;
     navContainer.appendChild(btn);
 
     btn.addEventListener('click', ()=>{
