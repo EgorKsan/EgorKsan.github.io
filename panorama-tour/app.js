@@ -23,7 +23,7 @@ Promise.all([
   }
 
   // ---------- Pannellum ----------
-  var viewer = pannellum.viewer('panorama', {
+  window.viewer = pannellum.viewer('panorama', {
     "default": { "firstScene": "studio1", "sceneFadeDuration": 400, "autoLoad": true },
     "scenes": buildScenes()
   });
