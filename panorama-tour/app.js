@@ -53,8 +53,7 @@ Promise.all([
     
     navContainer.appendChild(btn);
     btn.addEventListener('click', ()=>{
-      const yaw = viewer.getYaw(), pitch = viewer.getPitch(), hfov = viewer.getHfov();
-      viewer.loadScene(sceneId, yaw, pitch, hfov);
+      viewer.loadScene(sceneId);
       updateSceneButtons(sceneId);
     });
   });
