@@ -98,14 +98,20 @@ html,body{height:100%;margin:0;background:#000}
 
 @media (max-width: 768px) {
   .dot {
-    width: 33px;   /* 50 / 1.5 ≈ 33 */
+    width: 33px;
     height: 33px;
   }
   .dot.nav {
-    border-width: 4px; /* чтобы рамка смотрелась гармонично */
+    border-width: 4px;
   }
   .hotspot-label {
-    font-size: 11px;   /* тоже чуть меньше, чтобы текст влезал */
+    font-size: 11px;
     padding: 2px 4px;
+  }
+
+  /* кнопки навигации */
+  .scene-btn {
+    font-size: 12px;
+    padding: 6px 8px;
   }
 }
