@@ -117,3 +117,35 @@ html,body{height:100%;margin:0;background:#000}
     padding: 6px 8px;
   }
 }
+
+
+.credits {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #cccccc;
+    font-size: 14px;
+    border-radius: 6px;
+    z-index: 9999; /* чтобы поверх панорамы */
+}
+
+.credits img {
+    height: 24px;
+    width: auto;
+    border-radius: 4px;
+}
+
+.credits a {
+    color: #ffffff; /* можешь выбрать другой */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.credits a:hover {
+    text-decoration: underline;
+}
