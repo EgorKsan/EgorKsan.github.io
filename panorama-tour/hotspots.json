@@ -9,7 +9,7 @@
       { "id":"sl150", "type":"info", "yaw":-97.96, "pitch":5.60, "kind":"info", "text":"Godox SL150 with gobo" },
       { "id":"forza300b", "type":"info", "yaw":26.30, "pitch":3.57, "kind":"info", "text":"NANLite Forza 300B" },
       { "id":"qs400", "type":"info", "yaw":0.97, "pitch":6.94, "kind":"info", "text":"Godox Flash light QS400 II" },
-      { "id":"paper_bg", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" }
+      { "id":"paper_bg", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" },
       {"id": "studio_rules","type": "info","yaw": -168.96,"pitch": -11.94,"kind": "link","text": "Studio gobo rules","url": "https://photostudiogobo.com/#section-13516088"}
     ]
   },
