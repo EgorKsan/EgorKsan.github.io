@@ -5,11 +5,11 @@
       { "id":"to_s2", "type":"scene", "yaw":149.16, "pitch":22.74, "sceneId":"studio3", "kind":"nav", "text":"Go to Second Floor" },
       { "id":"to_s2", "type":"scene", "yaw":-49.49, "pitch":0.11, "sceneId":"studio2", "kind":"nav", "text":"Go to Dressing Room" },
       { "id":"qt600", "type":"info", "yaw":-69.38, "pitch":11.69, "kind":"info", "text":"Flash light QT600 III" },
-      { "id":"qt600", "type":"info", "yaw":-120.02, "pitch":4.22, "kind":"info", "text":"Litemons LA300R" },
-      { "id":"qt600", "type":"info", "yaw":-97.96, "pitch":5.60, "kind":"info", "text":"Godox SL150 with gobo" },
-      { "id":"qt600", "type":"info", "yaw":26.30, "pitch":3.57, "kind":"info", "text":"NANLite Forza 300B" },
-      { "id":"qt600", "type":"info", "yaw":0.97, "pitch":6.94, "kind":"info", "text":"Godox Flash light QS400 II" },
-      { "id":"sl150", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" }
+      { "id":"la300r", "type":"info", "yaw":-120.02, "pitch":4.22, "kind":"info", "text":"Litemons LA300R" },
+      { "id":"sl150", "type":"info", "yaw":-97.96, "pitch":5.60, "kind":"info", "text":"Godox SL150 with gobo" },
+      { "id":"forza300b", "type":"info", "yaw":26.30, "pitch":3.57, "kind":"info", "text":"NANLite Forza 300B" },
+      { "id":"qs400", "type":"info", "yaw":0.97, "pitch":6.94, "kind":"info", "text":"Godox Flash light QS400 II" },
+      { "id":"paper_bg", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" }
     ]
   },
   "studio2": {
@@ -23,9 +23,11 @@
     "pano": "p21",
     "hotSpots": [
       { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio4", "kind":"nav", "text":"Go to Window" },
-      { "id":"to_s2", "type":"scene", "yaw":-49.33, "pitch":-10.50, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
-      { "id":"paper_bg", "type":"info", "yaw":-84.33, "pitch":15.97, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
-      { "id":"sl150", "type":"info", "yaw":-145.18, "pitch":2.35, "kind":"info", "text":"Continuous light SL200." }
+      { "id":"to_s2", "type":"scene", "yaw": 34.45, "pitch":-11.30, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
+      { "id":"to_s2", "type":"scene", "yaw": -179.50, "pitch":-6.01, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
+      { "id":"paper_bg", "type":"info", "yaw":1.80, "pitch":20.16, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
+      { "id":"sl200", "type":"info", "yaw":-50.13, "pitch":9.68, "kind":"info", "text":"Godox Continuous light SL200." },
+      { "id":"la300r", "type":"info", "yaw":64.27, "pitch":2.71, "kind":"info", "text":"Litemons LA300R" }
     ]
   },
   "studio4": {
