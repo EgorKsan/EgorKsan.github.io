@@ -38,7 +38,7 @@ Promise.all([
           sceneId: h.sceneId,
           text: h.text,
           createTooltipFunc: makeDot,
-          createTooltipArgs: { kind: h.kind, tip: h.text }
+          createTooltipArgs: { kind: h.kind, tip: h.text, url: h.url || null }
         });
       });
     }
