@@ -1,5 +1,5 @@
 (function() {
-    function showFatalError(messageRu, messageEn) {
+    function showFatalError(messageEn) {
         const el = document.createElement('div');
         el.style.position = 'fixed';
         el.style.top = '0';
@@ -16,10 +16,7 @@
         el.style.fontSize = '20px';
         el.style.textAlign = 'center';
         el.innerHTML = `
-            <p style="font-size:28px;margin-bottom:10px;"></p>
-            <p>Упс... что-то пошло не так</p>
-            <p>${messageRu}</p>
-            <hr style="width:60%;margin:20px 0;border:1px solid #444;">
+            <img src="Source/SadIcon.png" alt="Error" style="width:64px;height:64px;margin-bottom:20px;">
             <p>Oops... something went wrong</p>
             <p>${messageEn}</p>
             <button id="reload-btn" style="
@@ -30,7 +27,7 @@
                 border:none;
                 color:#fff;
                 cursor:pointer;
-            ">Обновить страницу</button>
+            ">Reload page</button>
         `;
         document.body.innerHTML = '';
         document.body.appendChild(el);
@@ -44,16 +41,12 @@
     // Catching unhandled errors
     window.addEventListener('error', (e) => {
         console.error('Global error:', e.error || e.message);
-        showFatalError(
-            'The site may be under maintenance. Please try again later.'
-        );
+        showFatalError('The site may be under maintenance. Please try again later.');
     });
 
     // Catching errors in promises
     window.addEventListener('unhandledrejection', (e) => {
         console.error('Unhandled promise rejection:', e.reason);
-        showFatalError(
-            'The site may be under maintenance. Please try again later.'
-        );
+        showFatalError('The site may be under maintenance. Please try again later.');
     });
 })();
