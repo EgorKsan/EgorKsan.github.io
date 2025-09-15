@@ -62,6 +62,19 @@ Promise.all([
     if (args?.kind === 'nav') {
       hotSpotDiv.style.cursor = 'pointer';
     }
+    
+    // подпись рядом с хотспотом
+    if (args?.tip) {
+      const label = document.createElement('span');
+      label.className = 'hotspot-label';
+      label.textContent = args.tip;
+      hotSpotDiv.appendChild(label);
+    }
+
+    if (args?.kind === 'info' && args?.tip) {
+      hotSpotDiv.setAttribute('data-tip', args.tip);
+    }
+    
     if (args?.kind === 'link' && args?.url) {
       hotSpotDiv.style.cursor = 'pointer';
       hotSpotDiv.addEventListener('click', () => {
