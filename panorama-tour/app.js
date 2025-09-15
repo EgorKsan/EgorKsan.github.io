@@ -4,23 +4,47 @@ Promise.all([
 ]).then(([PHOTOS, HOTSPOTS]) => {
 
   // ---------- Генератор сцен ----------
-  function buildScenes(){
-    const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
+  function buildScenes() {
+    const common = { 
+      type: "equirectangular", 
+      autoLoad: true, 
+      hfov: 100, 
+      minHfov: 50, 
+      maxHfov: 120 
+    };
     const scenes = {};
-    for (const [sceneId, data] of Object.entries(HOTSPOTS)){
-      const panoFile = PHOTOS[data.pano].src;
-      scenes[sceneId] = { ...common, panorama: panoFile, hotSpots: []}; //, roll: photo.roll || 0, yaw: photo.yaw || 0 , pitch: photo.pitch || 0
-      data.hotSpots.forEach(h=>{
+  
+    for (const [sceneId, data] of Object.entries(HOTSPOTS)) {
+      const photo = PHOTOS[data.pano];
+      if (!photo) {
+        console.error(`❌ Нет фото для pano="${data.pano}" (sceneId="${sceneId}")`);
+        continue;
+      }
+  
+      scenes[sceneId] = { 
+        ...common, 
+        panorama: photo.src, 
+        hotSpots: [], 
+        roll: photo.roll || 0,      // ← вот оно
+        yaw: photo.yaw || 0,        // ← можно тоже использовать
+        pitch: photo.pitch || 0     // ← и это тоже
+      };
+  
+      data.hotSpots.forEach(h => {
         scenes[sceneId].hotSpots.push({
-          pitch:h.pitch, yaw:h.yaw, type:h.type, sceneId:h.sceneId,
-          text:h.text,
+          pitch: h.pitch, 
+          yaw: h.yaw, 
+          type: h.type, 
+          sceneId: h.sceneId,
+          text: h.text,
           createTooltipFunc: makeDot,
-          createTooltipArgs:{ kind:h.kind, tip:h.text }
+          createTooltipArgs: { kind: h.kind, tip: h.text }
         });
       });
     }
     return scenes;
   }
+
 
   // ---------- Pannellum ----------
   window.viewer = pannellum.viewer('panorama', {
