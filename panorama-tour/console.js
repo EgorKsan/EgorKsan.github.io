@@ -7,7 +7,7 @@
     notReady();
   }
 
-  // set angles
+  // установить углы
   window.setAngles = function ({ roll, yaw, pitch } = {}) {
     withViewer((v) => {
       const sceneId = v.getScene();
@@ -23,17 +23,21 @@
       if (typeof yaw === "number") v.setYaw(yaw);
       if (typeof pitch === "number") v.setPitch(pitch);
 
-      if (needReload) v.loadScene(sceneId, cfg.scenes[sceneId]);
+      if (needReload) {
+        // пересоздаём сцену с новым roll
+        v.loadScene(sceneId);
+      }
+
       console.log("✅ setAngles:", { roll, yaw, pitch });
     });
   };
 
-  // Shortcuts
+  // шорткаты
   window.setRoll  = (r) => window.setAngles({ roll:  r });
   window.setYaw   = (y) => window.setAngles({ yaw:   y });
   window.setPitch = (p) => window.setAngles({ pitch: p });
 
-  // Get angles
+  // получить углы
   window.getAngles = function () {
     return withViewer((v) => {
       const sceneId = v.getScene();
@@ -44,7 +48,7 @@
     });
   };
 
-  // Dump JSON
+  // вывести JSON
   window.dumpSceneAngles = function () {
     return withViewer((v) => {
       const sceneId = v.getScene();
@@ -61,5 +65,5 @@
     });
   };
 
-  console.log("🎛 pano-console загружен. Доступно: setRoll(y), setYaw(y), setPitch(p), setAngles({...}), getAngles(), dumpSceneAngles().");
+  console.log("🎛 pano-console загружен. Доступно: setRoll(x), setYaw(x), setPitch(x), setAngles({...}), getAngles(), dumpSceneAngles().");
 })();
