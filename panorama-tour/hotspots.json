@@ -22,7 +22,7 @@
   "studio3": {
     "pano": "p21",
     "hotSpots": [
-      { "id":"to_s2", "type":"scene", "yaw":5.75, "pitch":0.16, "sceneId":"studio4", "kind":"nav", "text":"Go to Window" },
+      { "id":"to_s2", "type":"scene", "yaw":112.60, "pitch":4.19, "sceneId":"studio4", "kind":"nav", "text":"Go to Window" },
       { "id":"to_s2", "type":"scene", "yaw": 34.45, "pitch":-11.30, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
       { "id":"to_s2", "type":"scene", "yaw": -179.50, "pitch":-6.01, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
       { "id":"paper_bg", "type":"info", "yaw":1.80, "pitch":20.16, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
