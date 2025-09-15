@@ -11,14 +11,15 @@
       { "id":"qs400", "type":"info", "yaw":0.97, "pitch":6.94, "kind":"info", "text":"Godox Flash light QS400 II" },
       { "id":"paper_bg", "type":"info", "yaw":76.11, "pitch":28.32, "kind":"info", "text":"Paper backgrounds" },
       {"id": "studio_rules","type": "info","yaw": -168.96,"pitch": -11.94,"kind": "link","text": "Studio gobo rules","url": "https://photostudiogobo.com/#section-13516088"},
-      {"id": "ek","type": "info","yaw": 0,"pitch": -90,"kind": "link","url": "https://www.instagram.com/egorxan/"}
+      {"id": "Credits","type": "info","yaw": 0,"pitch": -90,"kind": "link","text": "Credits", "url": "https://www.instagram.com/egorxan/"}
     ]
   },
   "studio2": {
     "pano": "p13",
     "hotSpots": [
       { "id":"to_s2", "type":"scene", "yaw":-147.95, "pitch":7.18, "sceneId":"studio1", "kind":"nav", "text":"Go to Panorama" },
-      { "id":"paper_bg", "type":"info", "yaw":142.41, "pitch":7.60, "kind":"info", "text":"Wardrobe" }
+      { "id":"paper_bg", "type":"info", "yaw":142.41, "pitch":7.60, "kind":"info", "text":"Wardrobe" },
+      { "id":"jewerly", "type":"info", "yaw":-88.68, "pitch":12.15, "kind":"info", "text":"Costume jewelry and props for your shoot" }
     ]
   },
   "studio3": {
