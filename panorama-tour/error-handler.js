@@ -16,7 +16,7 @@
         el.style.fontSize = '20px';
         el.style.textAlign = 'center';
         el.innerHTML = `
-            <p style="font-size:28px;margin-bottom:10px;">😢</p>
+            <p style="font-size:28px;margin-bottom:10px;"></p>
             <p>Упс... что-то пошло не так</p>
             <p>${messageRu}</p>
             <hr style="width:60%;margin:20px 0;border:1px solid #444;">
@@ -30,7 +30,7 @@
                 border:none;
                 color:#fff;
                 cursor:pointer;
-            ">🔄 Обновить страницу</button>
+            ">Обновить страницу</button>
         `;
         document.body.innerHTML = '';
         document.body.appendChild(el);
@@ -45,7 +45,6 @@
     window.addEventListener('error', (e) => {
         console.error('Global error:', e.error || e.message);
         showFatalError(
-            'Возможно, на сайте ведутся технические работы. Попробуйте зайти позже.',
             'The site may be under maintenance. Please try again later.'
         );
     });
@@ -54,7 +53,6 @@
     window.addEventListener('unhandledrejection', (e) => {
         console.error('Unhandled promise rejection:', e.reason);
         showFatalError(
-            'Возможно, на сайте ведутся технические работы. Попробуйте зайти позже.',
             'The site may be under maintenance. Please try again later.'
         );
     });
