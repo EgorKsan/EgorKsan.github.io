@@ -56,49 +56,27 @@ Promise.all([
   function makeDot(hotSpotDiv, args){
     hotSpotDiv.style.background = 'none';
     hotSpotDiv.classList.add('dot', args?.kind === 'nav' ? 'nav' : 'info');
+  
+    // -------- info tooltips ----------
     if (args?.kind === 'info' && args?.tip) {
       hotSpotDiv.setAttribute('data-tip', args.tip);
     }
-    if (args?.kind === 'nav') {
-      hotSpotDiv.style.cursor = 'pointer';
-    }
-
-    // nav и link — курсор + подпись
+  
+    // -------- nav и link ----------
     if (args?.kind === 'nav' || args?.kind === 'link') {
       hotSpotDiv.style.cursor = 'pointer';
   
       if (args?.tip) {
-        const label = document.createElement('div');
+        const label = document.createElement('span');
         label.className = 'hotspot-label';
         label.textContent = args.tip;
-        // вставляем не внутрь, а рядом
-        hotSpotDiv.parentElement.appendChild(label);
-  
-        // позиционируем относительно кружка
-        const rect = hotSpotDiv.getBoundingClientRect();
-        label.style.position = 'absolute';
-        label.style.left = rect.right + 8 + 'px';
-        label.style.top = rect.top + 'px';
-  
-        // обновляем при ресайзе/скролле
-        const updatePos = () => {
-          const r = hotSpotDiv.getBoundingClientRect();
-          label.style.left = r.right + 8 + 'px';
-          label.style.top = r.top + 'px';
-        };
-        window.addEventListener('resize', updatePos);
-        window.addEventListener('scroll', updatePos);
+        hotSpotDiv.appendChild(label);
       }
     }
-
-    if (args?.kind === 'info' && args?.tip) {
-      hotSpotDiv.setAttribute('data-tip', args.tip);
-    }
-    
+  
+    // -------- link with popup ----------
     if (args?.kind === 'link' && args?.url) {
-      hotSpotDiv.style.cursor = 'pointer';
       hotSpotDiv.addEventListener('click', () => {
-        // Создаём бокс
         const box = document.createElement('div');
         box.className = 'hotspot-box';
         box.innerHTML = `
@@ -109,20 +87,18 @@ Promise.all([
         `;
         document.body.appendChild(box);
     
-        // Кнопка "Open"
         box.querySelector('.hotspot-btn').addEventListener('click', () => {
           window.open(args.url, '_blank');
           box.remove();
         });
     
-        // Закрытие по клику вне
         box.addEventListener('click', (e) => {
           if (e.target === box) box.remove();
         });
       });
     }
   }
-
+  
   // ---------- Автогенерация кнопок ----------
   const navContainer = document.querySelector('.scene-nav');
   Object.entries(HOTSPOTS).forEach(([sceneId, data], i) => {
