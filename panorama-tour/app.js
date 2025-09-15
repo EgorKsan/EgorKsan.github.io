@@ -9,7 +9,7 @@ Promise.all([
     const scenes = {};
     for (const [sceneId, data] of Object.entries(HOTSPOTS)){
       const panoFile = PHOTOS[data.pano].src;
-      scenes[sceneId] = { ...common, panorama: panoFile, hotSpots: [] };
+      scenes[sceneId] = { ...common, panorama: panoFile, hotSpots: [], roll: photo.roll || 0, yaw: photo.yaw || 0 , pitch: photo.pitch || 0};
       data.hotSpots.forEach(h=>{
         scenes[sceneId].hotSpots.push({
           pitch:h.pitch, yaw:h.yaw, type:h.type, sceneId:h.sceneId,
