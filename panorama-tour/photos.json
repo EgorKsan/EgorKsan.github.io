@@ -1,6 +1,6 @@
 {
   "p11": { "src": "Source/P11fin.jpg?v=2", "title": "Cyclorama" },
   "p13": { "src": "Source/P13fin.jpg?v=2", "title": "Dressing room" },
-  "p21": { "src": "Source/p21fin.jpg?v=2", "title": "Second floor - main hall", "roll": 5 },
+  "p21": { "src": "Source/p21fin.jpg?v=2", "title": "Second floor - main hall", "roll": -1 },
   "p22": { "src": "Source/p22fin.jpg?v=2", "title": "Second floor - window" }
 }
