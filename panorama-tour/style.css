@@ -104,7 +104,7 @@ html,body{height:100%;margin:0;background:#000}
   .dot.nav {
     border-width: 4px;
   }
-  .scene-nav { top: 100%; transform:translateY(-100%);}
+  .scene-nav { top: 90%; transform:translateY(-100%);}
   
   .hotspot-label {
     font-size: 11px;
