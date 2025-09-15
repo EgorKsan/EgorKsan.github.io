@@ -17,7 +17,7 @@ Promise.all([
     for (const [sceneId, data] of Object.entries(HOTSPOTS)) {
       const photo = PHOTOS[data.pano];
       if (!photo) {
-        console.error(`❌ Нет фото для pano="${data.pano}" (sceneId="${sceneId}")`);
+        console.error(`Нет фото для pano="${data.pano}" (sceneId="${sceneId}")`);
         continue;
       }
   
