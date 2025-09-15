@@ -83,12 +83,18 @@ html,body{height:100%;margin:0;background:#000}
   background: #555;
 }
 .hotspot-label {
+  position: absolute;                 /* обязательно абсолютное позиционирование */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);   /* центрируем по кругу */
   white-space: nowrap;
-  display: inline-block;
-  background: rgba(255,255,255,0.7); /* белый полупрозрачный */
-  color: #000;                       /* чёрный текст для контраста */
+  background: rgba(255,255,255,0.7);  /* белый полупрозрачный фон */
+  color: #000;
   padding: 3px 6px;
   border-radius: 4px;
   font-size: 13px;
-  pointer-events: none;
+  line-height: 1.2;
+  text-align: center;
+  pointer-events: none;               /* текст не мешает клику по точке */
 }
+
