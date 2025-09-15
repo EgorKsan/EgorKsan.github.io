@@ -1,33 +1,65 @@
-(function() {
-    if (!window.viewer) {
-        console.warn("⚠️ Pannellum viewer ещё не инициализирован!");
-        return;
-    }
+(function () {
+  const notReady = () =>
+    console.warn("⚠️ viewer ещё не готов. Подожди пока загрузится и повтори команду.");
 
-    // Установка углов (roll, yaw, pitch)
-    window.setAngles = function({roll, yaw, pitch}) {
-        const sceneId = viewer.getScene();
-        const config = viewer.getConfig();
+  function withViewer(fn) {
+    if (window.viewer) return fn(window.viewer);
+    notReady();
+  }
 
-        if (!config.scenes[sceneId]) {
-            console.error("❌ Сцена не найдена:", sceneId);
-            return;
-        }
+  // set angles
+  window.setAngles = function ({ roll, yaw, pitch } = {}) {
+    withViewer((v) => {
+      const sceneId = v.getScene();
+      const cfg = v.getConfig();
+      cfg.scenes[sceneId] ||= {};
 
-        if (typeof roll === "number") config.scenes[sceneId].roll = roll;
-        if (typeof yaw === "number") config.scenes[sceneId].yaw = yaw;
-        if (typeof pitch === "number") config.scenes[sceneId].pitch = pitch;
+      let needReload = false;
 
-        // Перезагружаем сцену с новыми параметрами
-        viewer.loadScene(sceneId, config.scenes[sceneId]);
-        console.log("✅ Обновлено:", { roll, yaw, pitch });
-    };
+      if (typeof roll === "number") {
+        cfg.scenes[sceneId].roll = roll;
+        needReload = true;
+      }
+      if (typeof yaw === "number") v.setYaw(yaw);
+      if (typeof pitch === "number") v.setPitch(pitch);
 
-    // Быстрые хелперы
-    window.setRoll = r => setAngles({roll: r});
-    window.setYaw  = y => setAngles({yaw: y});
-    window.setPitch= p => setAngles({pitch: p});
+      if (needReload) v.loadScene(sceneId, cfg.scenes[sceneId]);
+      console.log("✅ setAngles:", { roll, yaw, pitch });
+    });
+  };
 
-    console.log("🎛 Панорамная консоль подключена!");
-    console.log("Используй: setRoll(число), setYaw(число), setPitch(число) или setAngles({roll,yaw,pitch})");
+  // Shortcuts
+  window.setRoll  = (r) => window.setAngles({ roll:  r });
+  window.setYaw   = (y) => window.setAngles({ yaw:   y });
+  window.setPitch = (p) => window.setAngles({ pitch: p });
+
+  // Get angles
+  window.getAngles = function () {
+    return withViewer((v) => {
+      const sceneId = v.getScene();
+      const sc = v.getConfig().scenes[sceneId] || {};
+      const data = { roll: sc.roll || 0, yaw: v.getYaw(), pitch: v.getPitch() };
+      console.log("ℹ️ getAngles:", data);
+      return data;
+    });
+  };
+
+  // Dump JSON
+  window.dumpSceneAngles = function () {
+    return withViewer((v) => {
+      const sceneId = v.getScene();
+      const sc = v.getConfig().scenes[sceneId] || {};
+      const obj = {
+        sceneId,
+        roll: sc.roll || 0,
+        yaw: Number(v.getYaw().toFixed(3)),
+        pitch: Number(v.getPitch().toFixed(3))
+      };
+      const json = JSON.stringify(obj, null, 2);
+      console.log(json);
+      return json;
+    });
+  };
+
+  console.log("🎛 pano-console загружен. Доступно: setRoll(y), setYaw(y), setPitch(p), setAngles({...}), getAngles(), dumpSceneAngles().");
 })();
