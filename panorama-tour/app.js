@@ -62,6 +62,32 @@ Promise.all([
     if (args?.kind === 'nav') {
       hotSpotDiv.style.cursor = 'pointer';
     }
+    if (args?.kind === 'link' && args?.url) {
+      hotSpotDiv.style.cursor = 'pointer';
+      hotSpotDiv.addEventListener('click', () => {
+        // Создаём бокс
+        const box = document.createElement('div');
+        box.className = 'hotspot-box';
+        box.innerHTML = `
+          <div class="hotspot-content">
+            <p>${args.tip || 'More info'}</p>
+            <button class="hotspot-btn">Open</button>
+          </div>
+        `;
+        document.body.appendChild(box);
+    
+        // Кнопка "Open"
+        box.querySelector('.hotspot-btn').addEventListener('click', () => {
+          window.open(args.url, '_blank');
+          box.remove();
+        });
+    
+        // Закрытие по клику вне
+        box.addEventListener('click', (e) => {
+          if (e.target === box) box.remove();
+        });
+      });
+    }
   }
 
   // ---------- Автогенерация кнопок ----------
