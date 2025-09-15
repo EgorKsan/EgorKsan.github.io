@@ -19,7 +19,8 @@
     "hotSpots": [
       { "id":"to_s2", "type":"scene", "yaw":-147.95, "pitch":7.18, "sceneId":"studio1", "kind":"nav", "text":"Go to Panorama" },
       { "id":"paper_bg", "type":"info", "yaw":142.41, "pitch":7.60, "kind":"info", "text":"Wardrobe" },
-      { "id":"jewerly", "type":"info", "yaw":-88.68, "pitch":12.15, "kind":"info", "text":"Costume jewelry and props for your shoot" }
+      { "id":"jewerly", "type":"info", "yaw":-88.68, "pitch":12.15, "kind":"info", "text":"Costume jewelry and props for your shoot" },
+      {"id": "Credits","type": "info","yaw": 0,"pitch": -90,"kind": "link","text": "Credits", "url": "https://www.instagram.com/egorxan/"}
     ]
   },
   "studio3": {
@@ -30,13 +31,15 @@
       { "id":"to_s2", "type":"scene", "yaw": -179.50, "pitch":-6.01, "sceneId":"studio1", "kind":"nav", "text":"Go to FirstFloor" },
       { "id":"paper_bg", "type":"info", "yaw":1.80, "pitch":20.16, "kind":"info", "text":"Extra service — paper backdrops. 500 RSD." },
       { "id":"sl200", "type":"info", "yaw":-50.13, "pitch":9.68, "kind":"info", "text":"Godox Continuous light SL200." },
-      { "id":"la300r", "type":"info", "yaw":64.27, "pitch":2.71, "kind":"info", "text":"Litemons LA300R" }
+      { "id":"la300r", "type":"info", "yaw":64.27, "pitch":2.71, "kind":"info", "text":"Litemons LA300R" },
+      {"id": "Credits","type": "info","yaw": 0,"pitch": -90,"kind": "link","text": "Credits", "url": "https://www.instagram.com/egorxan/"}
     ]
   },
   "studio4": {
     "pano": "p22",
     "hotSpots": [
-      { "id":"to_s1", "type":"scene", "yaw":-142.83, "pitch":1.42, "sceneId":"studio3", "kind":"nav", "text":"Go to Main Hall" }
+      { "id":"to_s1", "type":"scene", "yaw":-142.83, "pitch":1.42, "sceneId":"studio3", "kind":"nav", "text":"Go to Main Hall" },
+      {"id": "Credits","type": "info","yaw": 0,"pitch": -90,"kind": "link","text": "Credits", "url": "https://www.instagram.com/egorxan/"}
     ]
   }
 }
