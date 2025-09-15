@@ -98,3 +98,16 @@ html,body{height:100%;margin:0;background:#000}
   pointer-events: none;               /* текст не мешает клику по точке */
 }
 
+@media (max-width: 768px) {
+  .dot {
+    width: 33px;   /* 50 / 1.5 ≈ 33 */
+    height: 33px;
+  }
+  .dot.nav {
+    border-width: 4px; /* чтобы рамка смотрелась гармонично */
+  }
+  .hotspot-label {
+    font-size: 11px;   /* тоже чуть меньше, чтобы текст влезал */
+    padding: 2px 4px;
+  }
+}
