@@ -62,13 +62,33 @@ Promise.all([
     if (args?.kind === 'nav') {
       hotSpotDiv.style.cursor = 'pointer';
     }
-    
-    // подпись рядом с хотспотом
-    if (args?.tip) {
-      const label = document.createElement('span');
-      label.className = 'hotspot-label';
-      label.textContent = args.tip;
-      hotSpotDiv.appendChild(label);
+
+    // nav и link — курсор + подпись
+    if (args?.kind === 'nav' || args?.kind === 'link') {
+      hotSpotDiv.style.cursor = 'pointer';
+  
+      if (args?.tip) {
+        const label = document.createElement('div');
+        label.className = 'hotspot-label';
+        label.textContent = args.tip;
+        // вставляем не внутрь, а рядом
+        hotSpotDiv.parentElement.appendChild(label);
+  
+        // позиционируем относительно кружка
+        const rect = hotSpotDiv.getBoundingClientRect();
+        label.style.position = 'absolute';
+        label.style.left = rect.right + 8 + 'px';
+        label.style.top = rect.top + 'px';
+  
+        // обновляем при ресайзе/скролле
+        const updatePos = () => {
+          const r = hotSpotDiv.getBoundingClientRect();
+          label.style.left = r.right + 8 + 'px';
+          label.style.top = r.top + 'px';
+        };
+        window.addEventListener('resize', updatePos);
+        window.addEventListener('scroll', updatePos);
+      }
     }
 
     if (args?.kind === 'info' && args?.tip) {
