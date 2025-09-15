@@ -8,7 +8,8 @@ Promise.all([
     const common = { type:"equirectangular", autoLoad:true, hfov:100, minHfov:50, maxHfov:120 };
     const scenes = {};
     for (const [sceneId, data] of Object.entries(HOTSPOTS)){
-      const panoFile = PHOTOS[data.pano].src;
+      const photo = PHOTOS[data.pano];   // <-- вот это нужно
+      const panoFile = photo.src;
       scenes[sceneId] = { ...common, panorama: panoFile, hotSpots: [], roll: photo.roll || 0, yaw: photo.yaw || 0 , pitch: photo.pitch || 0};
       data.hotSpots.forEach(h=>{
         scenes[sceneId].hotSpots.push({
