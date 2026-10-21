@@ -35,7 +35,7 @@
   "studio4": {
     "pano": "p22",
     "hotSpots": [
-      { "id":"to_s1", "type":"scene", "yaw":-142.83, "pitch":1.42, "sceneId":"studio3", "kind":"nav", "text":"Go to Main Hall" }
+      { "id":"to_s1", "type":"scene", "yaw":-0.0, "pitch":1.42, "sceneId":"studio3", "kind":"nav", "text":"Go to Main Hall" }
     ]
   }
 }
